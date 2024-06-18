@@ -15,7 +15,7 @@ final class RMRequest {
     
     private let endpoint: RMEndpoint
     
-    private let pathComponents: Set<String>
+    private let pathComponents: [String]
     
     private let queryParameters: [URLQueryItem]
     
@@ -29,7 +29,6 @@ final class RMRequest {
                 string += "\($0)"
             })
         }
-        
         
         if !queryParameters.isEmpty {
             string += "?"
@@ -50,11 +49,15 @@ final class RMRequest {
     public let httpMethod = "GET"
     
     public init(endpoint: RMEndpoint,
-         pathComponents: Set<String> = [],
+         pathComponents:[String] = [],
          queryParameters: [URLQueryItem] = []
     ) {
         self.endpoint = endpoint
         self.pathComponents = pathComponents
         self.queryParameters = queryParameters
     }
+}
+
+extension RMRequest {
+    static let listCharactersRequest = RMRequest(endpoint: .character)
 }
